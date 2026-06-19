@@ -654,6 +654,10 @@ double GReWeightNuXSecCCQE::CalcWeightZExp(const genie::EventRecord & event)
     interaction->SetBit(kIAssumeFreeNucleon);
   }
 
+  std::cout << "[DEBUG CalcWeightZExp] phase_space = "
+            << KinePhaseSpace::AsString(phase_space)
+            << ", old_xsec = " << old_xsec << std::endl;
+
   if (!fUseOldWeightFromFile || fNWeightChecksDone < fNWeightChecksToDo) {
     double calc_old_xsec = fXSecModelDef->XSec(interaction, phase_space);
     if (fNWeightChecksDone < fNWeightChecksToDo) {
