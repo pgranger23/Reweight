@@ -1084,6 +1084,17 @@ double GReWeightXSecMEC::CalcWeightXSecShape(const genie::EventRecord& event)
   // The weight is then the likelihood ratio
   double weight = tweaked_prob_density / prob_density_def;
 
+  // Guard pathological MEC events where the default-model probability density
+  // degenerates -> a non-finite or extreme shape weight. Substitute unity for
+  // non-finite, then clamp to MEC-style limits [0.1, 1000].
+  if ( !std::isfinite(weight) ) {
+    LOG("ReW", pDEBUG) << "Non-finite XSecShape weight (tweaked_prob_density="
+      << tweaked_prob_density << ", prob_density_def=" << prob_density_def
+      << ") -> returning 1";
+    weight = 1.;
+  }
+  weight = std::max( 0.1, std::min( 1000., weight ) );
+
   LOG("ReW", pDEBUG) << "xsec_def = " << diff_xsec_def << ", xsec_alt = " << diff_xsec_alt;
   LOG("ReW", pDEBUG) << "tot_xsec_def = " << tot_xsec_def << ", tot_xsec_alt = " << tot_xsec_alt;
   LOG("ReW", pDEBUG) << "twk_dial = " << fCCXSecShapeTwkDial << ", prob_density_def = "
@@ -1239,6 +1250,17 @@ double GReWeightXSecMEC::CalcWeightXSecShape_Empirical(const genie::EventRecord&
 
   // The weight is then the likelihood ratio
   double weight = tweaked_prob_density / prob_density_def;
+
+  // Guard pathological MEC events where the default-model probability density
+  // degenerates -> a non-finite or extreme shape weight. Substitute unity for
+  // non-finite, then clamp to MEC-style limits [0.1, 1000].
+  if ( !std::isfinite(weight) ) {
+    LOG("ReW", pDEBUG) << "Non-finite XSecShape weight (tweaked_prob_density="
+      << tweaked_prob_density << ", prob_density_def=" << prob_density_def
+      << ") -> returning 1";
+    weight = 1.;
+  }
+  weight = std::max( 0.1, std::min( 1000., weight ) );
 
   LOG("ReW", pDEBUG) << "xsec_def = " << diff_xsec_def << ", xsec_alt = " << diff_xsec_alt;
   LOG("ReW", pDEBUG) << "tot_xsec_def = " << tot_xsec_def << ", tot_xsec_alt = " << tot_xsec_alt;
@@ -1438,6 +1460,17 @@ double GReWeightXSecMEC::CalcWeightXSecShape_Martini(const genie::EventRecord& e
 
   // The weight is then the likelihood ratio
   double weight = tweaked_prob_density / prob_density_def;
+
+  // Guard pathological MEC events where the default-model probability density
+  // degenerates -> a non-finite or extreme shape weight. Substitute unity for
+  // non-finite, then clamp to MEC-style limits [0.1, 1000].
+  if ( !std::isfinite(weight) ) {
+    LOG("ReW", pDEBUG) << "Non-finite XSecShape weight (tweaked_prob_density="
+      << tweaked_prob_density << ", prob_density_def=" << prob_density_def
+      << ") -> returning 1";
+    weight = 1.;
+  }
+  weight = std::max( 0.1, std::min( 1000., weight ) );
 
   LOG("ReW", pDEBUG) << "xsec_def = " << diff_xsec_def << ", xsec_alt = " << diff_xsec_alt;
   LOG("ReW", pDEBUG) << "tot_xsec_def = " << tot_xsec_def << ", tot_xsec_alt = " << tot_xsec_alt;
