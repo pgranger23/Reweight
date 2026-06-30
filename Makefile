@@ -28,7 +28,6 @@ BUILD_TARGETS =    print-make-info \
 		   install-scripts
 
 INSTALL_TARGETS =  print-makeinstall-info \
-		   check-previous-installation \
 		   make-install-dirs \
 		   copy-install-files
 
@@ -131,10 +130,10 @@ make-install-dirs: FORCE
 	[ -d ${GENIE_REWEIGHT_BIN_INSTALLATION_PATH} ] || mkdir ${GENIE_REWEIGHT_BIN_INSTALLATION_PATH}
 	[ -d ${GENIE_REWEIGHT_LIB_INSTALLATION_PATH} ] || mkdir ${GENIE_REWEIGHT_LIB_INSTALLATION_PATH}
 	[ -d ${GENIE_REWEIGHT_INC_INSTALLATION_PATH} ] || mkdir ${GENIE_REWEIGHT_INC_INSTALLATION_PATH}
-	mkdir ${GENIE_REWEIGHT_INC_INSTALLATION_PATH}/RwFramework
-	mkdir ${GENIE_REWEIGHT_INC_INSTALLATION_PATH}/RwIO
-	mkdir ${GENIE_REWEIGHT_INC_INSTALLATION_PATH}/RwCalculators
-	mkdir ${GENIE_REWEIGHT_INC_INSTALLATION_PATH}/ProfSpline
+	[ -d ${GENIE_REWEIGHT_INC_INSTALLATION_PATH}/RwFramework ] || mkdir -p ${GENIE_REWEIGHT_INC_INSTALLATION_PATH}/RwFramework
+	[ -d ${GENIE_REWEIGHT_INC_INSTALLATION_PATH}/RwIO ] || mkdir -p ${GENIE_REWEIGHT_INC_INSTALLATION_PATH}/RwIO
+	[ -d ${GENIE_REWEIGHT_INC_INSTALLATION_PATH}/RwCalculators ] || mkdir -p ${GENIE_REWEIGHT_INC_INSTALLATION_PATH}/RwCalculators
+	[ -d ${GENIE_REWEIGHT_INC_INSTALLATION_PATH}/ProfSpline ] || mkdir -p ${GENIE_REWEIGHT_INC_INSTALLATION_PATH}/ProfSpline
 
 copy-install-files: FORCE
 	@echo " "
